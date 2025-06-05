@@ -14,7 +14,7 @@ public class AppConfig {
     // 메서드 명에서 역할이 드러나도록 해야함
 
     public MemberService memberService(){
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        return new MemberServiceImpl(memberRepository());
     }
 
     private MemberRepository memberRepository(){
@@ -22,7 +22,7 @@ public class AppConfig {
     }
 
     public OrderService orderService(){
-        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     public DiscountPolicy discountPolicy(){
