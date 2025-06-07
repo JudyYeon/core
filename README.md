@@ -1,54 +1,104 @@
-## 🧼 Clean Architecture & OOP Checklist(POJO Ver.)
+# 💚 스프링 핵심원리 - 기본편
 
-클린 아키텍처의 핵심 원칙을 **순수 자바 기반(프레임워크 미사용)** 환경에서 잘 따르고 있는지를 확인합니다.
+## 💻 개발환경
 
----
+| 항목              | 내용                           |
+|------------------|--------------------------------|
+| Java 버전         | Java 17 (via Toolchain)        |
+| 빌드 툴           | Gradle                         |
+| Spring Boot 버전 | 3.5.0                          |
+| 의존성 관리       | Spring Dependency Management Plugin (1.1.7) |
+| 테스트 프레임워크 | JUnit 5 (JUnit Platform 사용) |
+| JVM 옵션          | `-Xshare:off` (테스트 시 적용) |
+| 저장소            | Maven Central                  |
 
-### 1. 도메인 순수성
+### 사용 플러그인
 
-- [ ] 도메인 모델은 어떤 외부 기술에도 의존하지 않는다.  
-  ✅ *예: `Reservation` 클래스는 DB, HTTP 등 어떤 구현체도 모른다.*
+- `java`
+- `org.springframework.boot`
+- `io.spring.dependency-management`
 
-- [ ] 도메인 규칙은 도메인 모델 내부에서 표현되며 외부에서 판단하지 않는다.  
-  ✅ *예: `reservation.isAvailable(date)`가 로직을 판단한다.*
+### 주요 의존성
 
----
+```gradle
+implementation 'org.springframework.boot:spring-boot-starter'
+testImplementation 'org.springframework.boot:spring-boot-starter-test'
+testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+```
 
-### 2. 계층 구조
+## 🧼 Clean Architecture & OOP Checklist(Spring Ver.)
 
-- [ ] 계층은 명확히 분리되어 있는가? (Domain, Application, Interface)
-- [ ] 의존성 방향은 항상 안쪽을 향하는가? (Infra → Interface → Application → Domain)
-
----
-
-### 3. 인터페이스 설계
-
-- [ ] 구현체에 의존하지 않고 추상화(Interface)를 통해 의존 관계를 맺는가?  
-  ✅ *예: `UserRepository` 인터페이스만 도메인이 알고 있다.*
-
-- [ ] 구현체는 도메인 밖에 존재하며, 도메인에 주입된다.
-
----
-
-### 4. OOP 원칙
-
-- [ ] SRP: 각 클래스가 단일 책임만 갖는다.
-- [ ] OCP: 코드 수정 없이 기능을 확장할 수 있다.
-- [ ] DIP: 상위 모듈이 하위 구현에 의존하지 않는다.
+Spring Framework 환경에서 클린 아키텍처와 OOP 원칙을 준수하고 있는지를 확인합니다.
 
 ---
 
-### 5. 테스트 용이성
+### 1. 계층/패키지 구조
 
-- [ ] 도메인 로직은 순수 Java로 테스트 가능하다.  
-  ✅ *예: JUnit5 + Assert 로 테스트 가능.*
-
-- [ ] 외부 의존성은 모두 Mocking 또는 Stub 가능하다.
+- [ ] `domain`, `application`, `interface`, `infra`로 패키지를 구분했는가?
+- [ ] `domain`은 `@Entity`, `@Service` 등 Spring Annotation 없이 설계되었는가?  
+  ❌ `@Component`, `@Autowired` 가 도메인 레이어에 있으면 안 됨.
 
 ---
 
-### 6. 부가 고려사항
+### 2. 의존성 주입 & 관리
 
-- [ ] Value Object는 불변 객체로 설계되었는가?
-- [ ] Entity는 식별자(ID)를 기준으로 동등성 비교가 가능한가?
+- [ ] 의존성 주입은 생성자 기반으로 수행되는가?  
+  ✅ `@RequiredArgsConstructor` 또는 수동 생성자 주입 사용
+
+- [ ] `@Configuration`이나 `@Component`는 외부 계층에만 존재하는가?  
+  ✅ DI 관리 대상은 Application 또는 Infra 레이어
+
+---
+
+### 3. 도메인 로직 분리
+
+- [ ] 비즈니스 판단 로직은 Domain 계층 안에 위치하는가?  
+  ✅ *예: `Reservation` 객체가 `isOverlappedWith(...)` 같은 도메인 메서드 보유*
+
+- [ ] Service 클래스는 오케스트레이션(흐름 제어)에 집중하는가?  
+  ❌ Service가 if-else로 비즈니스 규칙을 직접 판단하지 않아야 함
+
+---
+
+### 4. 아키텍처 방향성
+
+- [ ] 의존성은 Interface를 기준으로 흐르고, 실제 구현체는 바깥에 존재하는가?  
+  ✅ *예: `NotificationService` → `EmailNotificationService` 구현체*
+
+- [ ] 외부 시스템 접근 (`JPA`, `RestTemplate`, `Kafka`, 등)은 Adapter로 추상화되었는가?
+
+---
+
+### 5. JPA/DB 관련
+
+- [ ] Entity는 JPA 전용이며, 비즈니스 로직은 최소화되었는가?
+- [ ] VO는 `@Embeddable` 등으로 명확히 구분되었는가?
+
+---
+
+### 6. 테스트 용이성
+
+- [ ] Domain, Application 계층은 Spring Context 없이도 테스트 가능한가?  
+  ✅ *단위 테스트에서 `@SpringBootTest`를 피함*
+
+- [ ] 외부 API, DB는 통합 테스트 또는 TestContainer를 이용하여 분리했는가?
+
+---
+
+### 7. 컨트롤러/인터페이스 계층
+
+- [ ] Controller는 DTO 변환과 UseCase 호출만 수행하는가?  
+  ❌ DTO → Entity 변환, 도메인 로직 수행은 Controller에 있으면 안 됨
+
+- [ ] 요청/응답 객체는 Presentation 전용으로 설계되었는가?  
+  ✅ `RequestUserDto`, `ResponseUserDto` 등
+
+---
+
+### 8. Exception / Validation
+
+- [ ] 비즈니스 예외는 도메인 레이어에 정의된 커스텀 예외인가?  
+  ✅ *예: `DuplicateEmailException`, `ReservationConflictException`*
+
+- [ ] Controller에서는 글로벌 예외 핸들링(@ControllerAdvice)을 사용하는가?
 
