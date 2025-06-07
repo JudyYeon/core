@@ -3,15 +3,16 @@ package judy.core;
 import judy.core.member.Grade;
 import judy.core.member.Member;
 import judy.core.member.MemberService;
-import judy.core.member.MemberServiceImpl;
 import judy.core.order.Order;
 import judy.core.order.OrderService;
-import judy.core.order.OrderServiceImpl;
 
 public class OrderApp {
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderServiceImpl();
+
+        AppConfig appConfig = new AppConfig();
+
+        MemberService memberService = appConfig.memberService();
+        OrderService orderService = appConfig.orderService();
 
         Long memberId = 1L;
         Member member = new Member(memberId, "memberA", Grade.VIP);

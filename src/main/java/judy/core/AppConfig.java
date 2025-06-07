@@ -12,6 +12,7 @@ import judy.core.order.OrderServiceImpl;
 public class AppConfig {
 
     // 메서드 명에서 역할이 드러나도록 해야함
+    // 단축키 cmd + e = 이전 히스토리 보여짐
 
     public MemberService memberService(){
         return new MemberServiceImpl(memberRepository());
