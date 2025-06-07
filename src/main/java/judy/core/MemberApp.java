@@ -17,11 +17,11 @@ public class MemberApp {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         MemberService memberService = applicationContext.getBean("memberService", MemberService.class); // 기본 : 메서드명, 빈으로 등로간 것을 찾아와줌
 
-        Member member = new Member(1L, "memberA", Grade.VIP); // ctrl + alt + v = new Member에 대한 정의를 자동완성
+        Member member = new Member(1L, "memberA", Grade.VIP); // 단축키 ctrl + alt + v = new Member에 대한 정의를 자동완성
         memberService.join(member);
 
         Member findMember = memberService.findMember(1L);
-        System.out.println("new member = " + member.getName()); // sout + v
+        System.out.println("new member = " + member.getName()); // 단축키 soutv
         System.out.println("find member = " + findMember.getName());
     }
 }
