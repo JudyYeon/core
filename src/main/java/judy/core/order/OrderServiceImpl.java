@@ -3,7 +3,10 @@ package judy.core.order;
 import judy.core.discount.DiscountPolicy;
 import judy.core.member.Member;
 import judy.core.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
     // final = 반드시 값을 할당해야함. null 금지
     // 인터페이스 - 구현체 조합으로 의존
@@ -19,6 +22,7 @@ public class OrderServiceImpl implements OrderService{
     private DiscountPolicy discountPolicy;
 
     // 생성자
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
