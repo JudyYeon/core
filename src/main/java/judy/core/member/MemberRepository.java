@@ -1,5 +1,8 @@
 package judy.core.member;
 
+/**
+ * 회원 레포지토리 객체
+ */
 public interface MemberRepository {
 
     // 멤버 저장
