@@ -24,17 +24,17 @@ public class AppConfig {
 
     @Bean
     public MemberService memberService(){
-        return new MemberServiceImpl(memberRepository());
+        return new MemberServiceImpl(memberRepository()); // memberRepository 1번
     }
 
     @Bean
     public MemberRepository memberRepository(){
-        return new MemoryMemberRepository();
+        return new MemoryMemberRepository(); // 3번실행됨
     }
 
     @Bean
     public OrderService orderService(){
-        return new OrderServiceImpl(memberRepository(), discountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy()); // memberRepository 2번
     }
 
     @Bean
