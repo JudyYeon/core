@@ -6,7 +6,8 @@ package judy.core.member;
 public class MemberServiceImpl implements MemberService{
 
     // 구현체가 하나만 있을 때는 인터페이스명 xxxxImpl 이라고 명명한다.
-//    private final MemberRepository memberRepository = new MemoryMemberRepository(); // 여기도 직접 정해줬네~~... >> AppConfig 한테 맡기자
+//    private final MemberRepository memberRepository = new MemoryMemberRepository();
+// 여기도 직접 정해줬네~~... >> AppConfig 한테 맡기자
 
     private final MemberRepository memberRepository;
 
@@ -23,5 +24,10 @@ public class MemberServiceImpl implements MemberService{
     @Override
     public Member findMember(Long memberId) {
         return memberRepository.findById(memberId);
+    }
+
+    //테스트 용도
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
     }
 }
