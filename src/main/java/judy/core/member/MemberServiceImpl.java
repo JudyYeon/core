@@ -1,5 +1,6 @@
 package judy.core.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,8 +15,8 @@ public class MemberServiceImpl implements MemberService{
 
     private final MemberRepository memberRepository;
 
-    // 추상화에만 집중할 수 있게 생성자 주입
-    public MemberServiceImpl(MemberRepository memberRepository) {
+    @Autowired // @Component 를 통해 자동 빈 등록 시 구현체를 명시할 생성자가 없으므로 @Autowired 해야함 -> ac.getBean(MemberRepository.class);
+    public MemberServiceImpl(MemberRepository memberRepository) { // 추상화에만 집중할 수 있게 생성자 주입
         this.memberRepository = memberRepository;
     }
 
