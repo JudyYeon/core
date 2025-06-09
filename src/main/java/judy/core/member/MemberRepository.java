@@ -1,7 +1,7 @@
 package judy.core.member;
 
 /**
- * 회원 레포지토리 객체
+ * 회원 데이터 접근계층 객체
  */
 public interface MemberRepository {
 
