@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * 회원 서비스 객체
  */
-@Component("service")
+@Component
 public class MemberServiceImpl implements MemberService{
 
     // 구현체가 하나만 있을 때는 인터페이스명 xxxxImpl 이라고 명명한다.
