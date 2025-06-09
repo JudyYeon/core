@@ -15,8 +15,8 @@ import org.springframework.context.annotation.FilterType;
 public class AutoAppConfig {
 
     // 자동 주입 bean 과 수동 주입 bean 이 같을 경우 테스트 = 수동 주입이 우선임
-    @Bean(name = "memoryMemberRepository")
-    MemberRepository memberRepository(){
-        return new MemoryMemberRepository();
-    }
+//    @Bean(name = "memoryMemberRepository")
+//    MemberRepository memberRepository(){
+//        return new MemoryMemberRepository();
+//    }
 }
