@@ -6,7 +6,7 @@ import judy.core.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component // @Service 라는 것도 있는데 별 기능을 수행하진 않지만 트랜잭션 어노테이션 시작과 끝에 관련있음, 개발자에게 서비스라고 명시적으로 이해
 public class OrderServiceImpl implements OrderService{
     // final = 반드시 값을 할당해야함. null 금지
     // 인터페이스 - 구현체 조합으로 의존
