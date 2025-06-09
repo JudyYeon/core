@@ -1,8 +1,5 @@
 package judy.core;
 
-import judy.core.member.MemberRepository;
-import judy.core.member.MemoryMemberRepository;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
