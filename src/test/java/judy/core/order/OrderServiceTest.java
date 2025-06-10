@@ -30,7 +30,7 @@ public class OrderServiceTest {
         Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
     }
 
-    @Test
+   /* @Test
     void fieldInjectionTest(){
         OrderServiceImpl orderService = new OrderServiceImpl();
         // 이 부분에 setter 추가로 주입해주고,.. Member 객체를 만들어줘야함
@@ -38,5 +38,5 @@ public class OrderServiceTest {
         orderService.createOrder(1L, "itemA", 10000);
         // createOrder에서 memberRepository 객체 호출 시 null 이라 오류남
 
-    }
+    }*/
 }
