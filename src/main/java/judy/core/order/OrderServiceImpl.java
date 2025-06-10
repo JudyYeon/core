@@ -19,7 +19,12 @@ public class OrderServiceImpl implements OrderService{
     // 역할과 구현을 충실하게 분리했는가?
     // 다형성도 활용하고, 인터페이스와 구현객체를 분리했는가? -- No
     // 추상인터페이스에 의존하지만 구현 클래스에도 의존하고 있음... 기능확장시 클라이언트 코드에 영향을 준다 > OCP 위반
-    private final DiscountPolicy discountPolicy;
+    private DiscountPolicy discountPolicy;
+
+    // 이렇게 외부에서 수정할 수 있도록 하면 큰일남!!!!
+    public void setDiscountPolicy(DiscountPolicy discountPolicy){
+        this.discountPolicy = discountPolicy;
+    }
 
     // 생성자
     @Autowired
