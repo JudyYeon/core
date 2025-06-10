@@ -10,9 +10,23 @@ import org.springframework.stereotype.Component;
 public class OrderServiceImpl implements OrderService{
     // final = 반드시 값을 할당해야함. null 금지
     // 인터페이스 - 구현체 조합으로 의존
-    private final MemberRepository memberRepository;
+    private MemberRepository memberRepository;
 
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy(); // 문제발생 구간..!
+
+    @Autowired
+    public void setMemberRepository(MemberRepository memberRepository) {
+        // 생성자와는 달리 setter는 빈 생성 순서를 보장하지 않음
+        System.out.println("memberRepository = " + memberRepository);
+        this.memberRepository = memberRepository;
+    }
+
+    @Autowired
+    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+        // 생성자와는 달리 setter는 빈 생성 순서를 보장하지 않음
+        System.out.println("discountPolicy = " + discountPolicy);
+        this.discountPolicy = discountPolicy;
+    }
 
     // 새로운 할인 정책이 나왔다면 OrderServiceImpl 소스를 변경해야한다.
     //  private final DiscountPolicy discountPolicy = new 이 부분에 변경되는 정책 구현체();
@@ -21,14 +35,10 @@ public class OrderServiceImpl implements OrderService{
     // 추상인터페이스에 의존하지만 구현 클래스에도 의존하고 있음... 기능확장시 클라이언트 코드에 영향을 준다 > OCP 위반
     private DiscountPolicy discountPolicy;
 
-    @Autowired
-    public void setDiscountPolicy(DiscountPolicy discountPolicy){
-        this.discountPolicy = discountPolicy; //Setter 도 의존관계를 주입할 수 있다
-    }
-
     // 생성자 가 하나이므로 @Autowired를 생략해도 된다
 //    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("1. OrderServiceImpl 클래스의 orderServiceImpl 빈 생성");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
