@@ -35,14 +35,6 @@ public class OrderServiceImpl implements OrderService{
     // 추상인터페이스에 의존하지만 구현 클래스에도 의존하고 있음... 기능확장시 클라이언트 코드에 영향을 준다 > OCP 위반
     private DiscountPolicy discountPolicy;
 
-    // 생성자 가 하나이므로 @Autowired를 생략해도 된다
-//    @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        System.out.println("1. OrderServiceImpl 클래스의 orderServiceImpl 빈 생성");
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
-
     /**
      * 주문 생성하기
      */
