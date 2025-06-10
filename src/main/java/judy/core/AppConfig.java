@@ -7,6 +7,7 @@ import judy.core.member.MemberService;
 import judy.core.member.MemberServiceImpl;
 import judy.core.member.MemoryMemberRepository;
 import judy.core.order.OrderService;
+import judy.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,8 +34,7 @@ public class AppConfig {
 
     @Bean
     public OrderService orderService(){
-//        return new OrderServiceImpl(memberRepository(), discountPolicy()); // memberRepository 2번
-        return null;
+        return new OrderServiceImpl(memberRepository(), discountPolicy()); // memberRepository 2번
     }
 
     @Bean
