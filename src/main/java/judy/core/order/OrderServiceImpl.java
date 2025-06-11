@@ -3,7 +3,6 @@ package judy.core.order;
 import judy.core.discount.DiscountPolicy;
 import judy.core.member.Member;
 import judy.core.member.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,12 +24,6 @@ public class OrderServiceImpl implements OrderService{
     // 생성자 가 하나일때는 @Autowired를 생략해도 된다
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl 클래스의 orderServiceImpl 빈 생성");
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
-
-    @Autowired
-    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
