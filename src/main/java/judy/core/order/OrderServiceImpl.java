@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class OrderServiceImpl implements OrderService{
     // final = 반드시 값을 할당해야함. null 금지
     // 인터페이스 - 구현체 조합으로 의존
-    private MemberRepository memberRepository;
+    private final MemberRepository memberRepository;
 
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy(); // 문제발생 구간..!
 
@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService{
     // 역할과 구현을 충실하게 분리했는가?
     // 다형성도 활용하고, 인터페이스와 구현객체를 분리했는가? -- No
     // 추상인터페이스에 의존하지만 구현 클래스에도 의존하고 있음... 기능확장시 클라이언트 코드에 영향을 준다 > OCP 위반
-    private DiscountPolicy discountPolicy;
+    private final DiscountPolicy discountPolicy;
 
     // 생성자 가 하나일때는 @Autowired를 생략해도 된다
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
