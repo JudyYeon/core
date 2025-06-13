@@ -2,11 +2,11 @@ package judy.core.discount;
 
 import judy.core.member.Grade;
 import judy.core.member.Member;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("mainDiscountPolicy")
+@Primary // 우선순위지정 , 단축키 구현체 cmd + opt + B
 public class RateDiscountPolicy implements DiscountPolicy{
 
     private int discountPercent = 10;
