@@ -3,9 +3,11 @@ package judy.core.order;
 import judy.core.discount.DiscountPolicy;
 import judy.core.member.Member;
 import judy.core.member.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor // 기본 생성자 대신 어노테이션으로 깔끔하게!!
 // @Service 라는 것도 있는데 별 기능을 수행하진 않지만 트랜잭션 어노테이션 시작과 끝에 관련있음, 개발자에게 서비스라고 명시적으로 이해
 public class OrderServiceImpl implements OrderService{
     // final = 반드시 값을 할당해야함. null 금지
@@ -22,11 +24,11 @@ public class OrderServiceImpl implements OrderService{
     private final DiscountPolicy discountPolicy;
 
     // 생성자 가 하나일때는 @Autowired를 생략해도 된다
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        System.out.println("1. OrderServiceImpl 클래스의 orderServiceImpl 빈 생성");
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        System.out.println("1. OrderServiceImpl 클래스의 orderServiceImpl 빈 생성");
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
     /**
      * 주문 생성하기
