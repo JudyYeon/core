@@ -25,10 +25,10 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     // 생성자 가 하나일때는 @Autowired를 생략해도 된다
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy fixDiscountPolicy) {
         System.out.println("1. OrderServiceImpl 클래스의 orderServiceImpl 빈 생성");
         this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
+        this.discountPolicy = fixDiscountPolicy;
     }
 
     /**
