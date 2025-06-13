@@ -4,6 +4,7 @@ import judy.core.discount.DiscountPolicy;
 import judy.core.member.Member;
 import judy.core.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,10 +26,10 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     // 생성자 가 하나일때는 @Autowired를 생략해도 된다
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy fixDiscountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl 클래스의 orderServiceImpl 빈 생성");
         this.memberRepository = memberRepository;
-        this.discountPolicy = fixDiscountPolicy;
+        this.discountPolicy = discountPolicy;
     }
 
     /**
