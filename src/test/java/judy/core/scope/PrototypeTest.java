@@ -25,6 +25,9 @@ public class PrototypeTest {
 
         assertThat(prototypeBean1).isNotSameAs(prototypeBean2);
 
+        prototypeBean1.destroy();
+        prototypeBean2.destroy();
+
         ac.close(); // 이때 close 호출되지 않음
 
     }
