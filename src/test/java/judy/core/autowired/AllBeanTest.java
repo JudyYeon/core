@@ -2,6 +2,7 @@ package judy.core.autowired;
 
 import java.util.List;
 import java.util.Map;
+import judy.core.AutoAppConfig;
 import judy.core.discount.DiscountPolicy;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -11,7 +12,7 @@ public class AllBeanTest {
 
     @Test
     void findAllBean() {
-        ApplicationContext ac = new AnnotationConfigApplicationContext(DiscountService.class);
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class, DiscountService.class);
 
 
     }
@@ -24,6 +25,7 @@ public class AllBeanTest {
         private final Map<String, DiscountPolicy> policyMap;
         private final List<DiscountPolicy> policies;
 
+         // 생성자가 하나라 @Autowired 생략가능
         public DiscountService(Map<String, DiscountPolicy> policyMap, List<DiscountPolicy> policies) {
             this.policyMap = policyMap;
             this.policies = policies;
