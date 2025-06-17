@@ -3,7 +3,7 @@ package judy.core.scope;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -32,7 +32,7 @@ public class SingletonWithPrototypeTest1 {
     static class ClientBean {
 
         @Autowired
-        private ObjectProvider<PrototypeBean> prototypeBeanObjectProvider;
+        private ObjectFactory<PrototypeBean> prototypeBeanObjectProvider;
 
 //        @Autowired
 //        public ClientBean(PrototypeBean prototypeBean) {
