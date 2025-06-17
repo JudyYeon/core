@@ -21,10 +21,12 @@ public class LogDemoController {
     @ResponseBody
     public String logDemo(HttpServletRequest request){
 
+        // 공통 처리가 가능한 인터셉터나 서블릿필터 활용하면 좋음
         String requestURL = request.getRequestURL().toString();
         myLogger.setRequestURL(requestURL);
-
+        // 로깅 인스턴스 호출
         myLogger.log("controller test");
+        // 비즈니스 계층 서비스 호출
         logDemoService.logic("testId");
 
         return "OK";
