@@ -2,6 +2,7 @@ package judy.core.common;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +16,8 @@ public class LogDemoController {
 
     // Autowired 되어있으므로 생성된 Bean 주입하여 final 가능
     private final LogDemoService logDemoService;
-    private final MyLogger myLogger;
+    // ObjectProvider를 사용하여 (LookUp) DI 컨테이너에 스프링 Bean 생성요청을 지연 할 수 있도록 함
+    private final ObjectProvider<MyLogger> myLoggerObjectProvider;
 
     @RequestMapping("log-demo")
     @ResponseBody
@@ -23,6 +25,8 @@ public class LogDemoController {
 
         // 공통 처리가 가능한 인터셉터나 서블릿필터 활용하면 좋음
         String requestURL = request.getRequestURL().toString();
+        MyLogger myLogger = myLoggerObjectProvider.getObject(); // 이때 미뤄둔 생성요청으로 Bean 주입
+
         myLogger.setRequestURL(requestURL);
         // 로깅 인스턴스 호출
         myLogger.log("controller test");
